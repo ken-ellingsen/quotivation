@@ -10,6 +10,7 @@ function App() {
   const [quotes, setQuotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState("All");
+  const [favoriteQuotes, setFavoriteQuotes] = useState([]);
 
   // Other variables
   const quotesUrl =
@@ -18,6 +19,7 @@ function App() {
     ["All", "Leadership", "Empathy", "Motivation", "Learning", "Success", "Empowerment"];
   const filteredQuotes =
     category !== "All" ? quotes.filter((quote) => quote.categories.includes(category)) : quotes;
+  const maxFaves = 3;
 
   // Functions
   const fetchQuotes = async () => {
@@ -36,6 +38,11 @@ function App() {
     setCategory(e.target.value);
   }
   
+  const addToFavorites = (quoteId) => {
+    const selectedQuote = quotes.find((quote) => quote.id === quoteId);
+  }
+
+  // useEffect Hook
   useEffect(() => {
     fetchQuotes();
   }, []);
@@ -44,7 +51,8 @@ function App() {
     <div className='App'>
       <Header />
       <main>
-        {loading ? <Loader /> : <Quotes quotes={filteredQuotes} category={category} categories={categories} change={handleCategoryChange} />}
+        {loading ? <Loader /> : <Quotes quotes={filteredQuotes} category={category} categories={categories} 
+          change={handleCategoryChange} addToFavorites={addToFavorites} />}
       </main>
       <Footer />
     </div>
