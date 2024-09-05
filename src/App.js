@@ -68,7 +68,7 @@ function App() {
       <main>
         <FavoriteQuotes favoriteQuotes={favoriteQuotes} maxFaves={maxFaves} removeFromFavorites={removeFromFavorites} />
         {loading ? <Loader /> : <Quotes quotes={filteredQuotes} category={category} categories={categories} 
-          change={handleCategoryChange} addToFavorites={addToFavorites} />}
+            change={handleCategoryChange} addToFavorites={addToFavorites} favoriteQuotes={favoriteQuotes} />}
       </main>
       <Footer />
     </div>
