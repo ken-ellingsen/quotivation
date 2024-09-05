@@ -40,6 +40,16 @@ function App() {
   
   const addToFavorites = (quoteId) => {
     const selectedQuote = quotes.find((quote) => quote.id === quoteId);
+    const alreadyFavorite = favoriteQuotes.find((favorite) => favorite.id === selectedQuote.id);
+
+    if (alreadyFavorite) {
+      console.log("This quote is already in your favorites! Choose another");
+    } else if (favoriteQuotes.length < maxFaves) {
+      setFavoriteQuotes([...favoriteQuotes, selectedQuote]);
+      console.log("Added to favorites!");
+    } else {
+      console.log("Max number of Favorite Quotes reached. Please delete one to add another!");
+    }
   }
 
   // useEffect Hook
@@ -51,6 +61,19 @@ function App() {
     <div className='App'>
       <Header />
       <main>
+        <section className='favorite-quotes'>
+          <div className='wrapper quotes'>
+            <h3>Top 3 favorite quotes</h3>
+            {favoriteQuotes.length > 0 && JSON.stringify(favoriteQuotes)}
+            <div className='favorite-quotes-description'>
+              <p>
+                You can add up to three favorites by selecting from the options below.
+                <br />
+                Once you choose, they will appear here.
+              </p>
+            </div>
+          </div>
+        </section>
         {loading ? <Loader /> : <Quotes quotes={filteredQuotes} category={category} categories={categories} 
           change={handleCategoryChange} addToFavorites={addToFavorites} />}
       </main>
