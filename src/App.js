@@ -22,7 +22,7 @@ function App() {
   const categories = 
     ["All", "Leadership", "Empathy", "Motivation", "Learning", "Success", "Empowerment"];
   const filteredQuotes =
-    category !== "All" ? quotes.filter((quote) => quote.categories.includes(category)) : quotes;
+    category === "All" ? quotes : quotes.filter((quote) => quote.categories.includes(category));
   const maxFaves = 3;
 
   // Functions
@@ -71,7 +71,7 @@ function App() {
 
   }
 
-  // useEffect Hook
+  // useEffect Hooks
   useEffect(() => {
     fetchQuotes();
   }, []);
