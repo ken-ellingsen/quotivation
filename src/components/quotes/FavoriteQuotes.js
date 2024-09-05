@@ -1,11 +1,18 @@
 import React from "react";
+import FavoriteQuoteCard from "./FavoriteQuotesCard";
 
 const FavoriteQuotes = ({ favoriteQuotes, maxFaves }) => {
     return(
         <section className='favorite-quotes'>
             <div className='wrapper quotes'>
                 <h3>Top 3 favorite quotes</h3>
-                {favoriteQuotes.length > 0 && JSON.stringify(favoriteQuotes)}
+                {favoriteQuotes.length > 0 && 
+                    <ul>
+                        {favoriteQuotes.map((favoriteQuote) => (
+                            <FavoriteQuoteCard key={favoriteQuote.id} favoriteQuote={favoriteQuote} />
+                        ))}
+                    </ul>
+                }
                 <div className='favorite-quotes-description'>
                     <p>
                     You can add up to three favorites by selecting from the options below.
