@@ -42,7 +42,6 @@ function App() {
   const addToFavorites = (quoteId) => {
     const selectedQuote = quotes.find((quote) => quote.id === quoteId);
     const alreadyFavorite = favoriteQuotes.find((favorite) => favorite.id === selectedQuote.id);
-
     if (alreadyFavorite) {
       console.log("This quote is already in your favorites! Choose another");
     } else if (favoriteQuotes.length < maxFaves) {
@@ -51,6 +50,11 @@ function App() {
     } else {
       console.log("Max number of Favorite Quotes reached. Please delete one to add another!");
     }
+  }
+
+  const removeFromFavorites = (quoteId) => {
+    const updatedFavorites = favoriteQuotes.filter((quote) => quote.id !== quoteId);
+    setFavoriteQuotes(updatedFavorites);
   }
 
   // useEffect Hook
@@ -62,7 +66,7 @@ function App() {
     <div className='App'>
       <Header />
       <main>
-        <FavoriteQuotes favoriteQuotes={favoriteQuotes} maxFaves={maxFaves} />
+        <FavoriteQuotes favoriteQuotes={favoriteQuotes} maxFaves={maxFaves} removeFromFavorites={removeFromFavorites} />
         {loading ? <Loader /> : <Quotes quotes={filteredQuotes} category={category} categories={categories} 
           change={handleCategoryChange} addToFavorites={addToFavorites} />}
       </main>
