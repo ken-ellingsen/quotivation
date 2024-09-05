@@ -67,10 +67,6 @@ function App() {
     setShowMessage(false);
   }
 
-  const setStorage = () => {
-
-  }
-
   // useEffect Hooks
   useEffect(() => {
     fetchQuotes();
